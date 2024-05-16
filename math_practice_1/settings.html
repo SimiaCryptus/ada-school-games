@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Settings</title>
+     <title>Settings</title>
     <link rel="stylesheet" href="styles.css">
+     <script src="settings.js" defer></script>
 </head>
 <body>
+     <h1>Settings</h1>
+    <form id="settings-form" class="settings">
+         <label for="difficulty">Difficulty:</label>
+         <select id="difficulty" name="difficulty">
     <div class="settings-container">
         <h1>Game Settings</h1>
         
@@ -17,6 +22,13 @@
                 <option value="medium">Medium</option>
                 <option value="hard">Hard</option>
             </select>
+         <br>
+         <label for="sound">Sound:</label>
+         <input type="checkbox" id="sound" name="sound">
+         <br>
+         <button type="submit">Save Settings</button>
+     </form>
+     <button onclick="window.location.href='index.html'">Back to Game</button>
         </div>
         
         <div class="setting-option">

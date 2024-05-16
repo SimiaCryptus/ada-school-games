@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 let currentQuestion = {};
 let score = 0;
-let difficulty = 'easy'; // Default difficulty level
+let difficulty = loadSettings().difficulty; // Load difficulty from settings
 
 // Initialize the game
 function initGame() {
@@ -94,7 +94,7 @@ function createQuestion(difficulty) {
 // Check the user's answer
 function checkAnswer(selectedAnswer) {
     const feedbackElement = document.getElementById('feedback-message');
-    if (selectedAnswer === currentQuestion.correctAnswer) {
+    if (selectedAnswer == currentQuestion.correctAnswer) { // Use == for type coercion
         score++;
         feedbackElement.innerText = 'Correct!';
     } else {
@@ -110,4 +110,18 @@ function checkAnswer(selectedAnswer) {
 // Get a random integer between min (inclusive) and max (inclusive)
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Load settings from local storage
+function loadSettings() {
+    const settings = localStorage.getItem('gameSettings');
+    if (settings) {
+        return JSON.parse(settings);
+    } else {
+        // Default settings
+        return {
+            difficulty: 'easy',
+            sound: true
+        };
+    }
 }
