@@ -7,19 +7,31 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 let currentQuestion = {};
 let score = 0;
-let difficulty = loadSettings().difficulty; // Load difficulty from settings
+let difficulty;
+
+try {
+    difficulty = loadSettings().difficulty || 'easy'; // Load difficulty from settings
+} catch (error) {
+    console.error('Error loading settings:', error);
+    difficulty = 'easy';
+}
 
 // Initialize the game
 function initGame() {
-    document.getElementById('start-button').addEventListener('click', startGame);
-    document.getElementById('instructions-button').addEventListener('click', showInstructions);
-    document.getElementById('settings-button').addEventListener('click', showSettings);
+     const startButton = document.getElementById('start-button');
+     const instructionsButton = document.getElementById('instructions-button');
+     const settingsButton = document.getElementById('settings-button');
+     
+    if (startButton) startButton.addEventListener('click', startGame);
+    if (instructionsButton) instructionsButton.addEventListener('click', showInstructions);
+    if (settingsButton) settingsButton.addEventListener('click', showSettings);
 }
 
 // Start the game
 function startGame() {
     score = 0;
-    document.getElementById('score').innerText = `Score: ${score}`;
+    const scoreElement = document.getElementById('score');
+    if (scoreElement) scoreElement.innerText = `Score: ${score}`;
     generateQuestion();
 }
 
@@ -53,25 +65,12 @@ function generateQuestion() {
 
 // Create a math question based on difficulty
 function createQuestion(difficulty) {
-    let num1, num2, correctAnswer, question;
+    const { min, max } = getRangeByDifficulty(difficulty);
+    const num1 = getRandomInt(min, max);
+    const num2 = getRandomInt(min, max);
+    const correctAnswer = num1 + num2;
+    const question = `${num1} + ${num2} = ?`;
     const choices = [];
-
-    if (difficulty === 'easy') {
-        num1 = getRandomInt(1, 10);
-        num2 = getRandomInt(1, 10);
-        correctAnswer = num1 + num2;
-        question = `${num1} + ${num2} = ?`;
-    } else if (difficulty === 'medium') {
-        num1 = getRandomInt(1, 20);
-        num2 = getRandomInt(1, 20);
-        correctAnswer = num1 + num2;
-        question = `${num1} + ${num2} = ?`;
-    } else if (difficulty === 'hard') {
-        num1 = getRandomInt(1, 50);
-        num2 = getRandomInt(1, 50);
-        correctAnswer = num1 + num2;
-        question = `${num1} + ${num2} = ?`;
-    }
 
     choices.push(correctAnswer);
     while (choices.length < 4) {
@@ -94,13 +93,14 @@ function createQuestion(difficulty) {
 // Check the user's answer
 function checkAnswer(selectedAnswer) {
     const feedbackElement = document.getElementById('feedback-message');
-    if (selectedAnswer == currentQuestion.correctAnswer) { // Use == for type coercion
+    if (selectedAnswer === currentQuestion.correctAnswer) {
         score++;
         feedbackElement.innerText = 'Correct!';
     } else {
         feedbackElement.innerText = 'Try Again!';
     }
-    document.getElementById('score').innerText = `Score: ${score}`;
+    const scoreElement = document.getElementById('score');
+    if (scoreElement) scoreElement.innerText = `Score: ${score}`;
     setTimeout(() => {
         feedbackElement.innerText = '';
         generateQuestion();
@@ -112,16 +112,19 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// Load settings from local storage
-function loadSettings() {
-    const settings = localStorage.getItem('gameSettings');
-    if (settings) {
-        return JSON.parse(settings);
-    } else {
-        // Default settings
-        return {
-            difficulty: 'easy',
-            sound: true
-        };
+// Get range of numbers based on difficulty
+function getRangeByDifficulty(difficulty) {
+    switch (difficulty) {
+        case 'easy':
+            return { min: 1, max: 10 };
+        case 'medium':
+            return { min: 1, max: 20 };
+        case 'hard':
+            return { min: 1, max: 50 };
+        default:
+            return { min: 1, max: 10 };
     }
 }
+
+// Load settings from utils.js
+import { loadSettings } from './utils.js';

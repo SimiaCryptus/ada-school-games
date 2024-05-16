@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Settings</title>
     <link rel="stylesheet" href="styles.css">
-     <script src="settings.js" defer></script>
+     <script type="module" src="settings.js" defer></script>
 </head>
 <body>
      <h1>Settings</h1>
-    <form id="settings-form" class="settings">
+     <form id="settings-form">
          <label for="difficulty">Difficulty:</label>
          <select id="difficulty" name="difficulty">
     <div class="settings-container">
@@ -28,6 +28,7 @@
          <br>
          <button type="submit">Save Settings</button>
      </form>
+    <div id="feedback-message" class="feedback"></div>
      <button onclick="window.location.href='index.html'">Back to Game</button>
         </div>
         
@@ -40,6 +41,6 @@
         <button id="back-to-game-button" class="button">Back to Game</button>
     </div>
     
-    <script src="settings.js"></script>
+    <script type="module" src="settings.js"></script>
 </body>
 </html>
