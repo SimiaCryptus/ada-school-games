@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Settings</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="settings-container">
+        <h1>Game Settings</h1>
+        
+        <div class="setting-option">
+            <label for="difficulty-level">Difficulty Level:</label>
+            <select id="difficulty-level">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
+        
+        <div class="setting-option">
+            <label for="sound-toggle">Sound:</label>
+            <input type="checkbox" id="sound-toggle" checked>
+        </div>
+        
+        <button id="save-settings-button" class="button">Save Settings</button>
+        <button id="back-to-game-button" class="button">Back to Game</button>
+    </div>
+    
+    <script src="settings.js"></script>
+</body>
+</html>

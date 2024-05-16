@@ -1,0 +1,108 @@
+/* General Styles */
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #f0f8ff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Game Area */
+.game-area {
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.question {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.answer {
+    display: inline-block;
+    margin: 10px;
+}
+
+.feedback {
+    font-size: 1.5em;
+    color: #ff6347;
+    margin-top: 20px;
+}
+
+#score {
+    font-size: 1.2em;
+    color: #4caf50;
+    margin-top: 10px;
+}
+
+/* Buttons */
+.button {
+    background-image: url('button.png');
+    background-size: cover;
+    background-position: center;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1.2em;
+    padding: 15px 30px;
+    cursor: pointer;
+    margin: 10px;
+    transition: transform 0.2s;
+}
+
+.button:hover {
+    transform: scale(1.1);
+}
+
+.button:active {
+    transform: scale(0.9);
+}
+
+/* Specific Buttons */
+#start-button, #instructions-button, #settings-button {
+    width: 200px;
+}
+
+#answer-choices .button {
+    width: 100px;
+}
+
+/* Instructions and Settings Pages */
+.instructions, .settings {
+    font-size: 1.2em;
+    color: #333;
+    text-align: left;
+    margin: 20px;
+}
+
+.instructions ul, .settings ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.instructions li, .settings li {
+    margin-bottom: 10px;
+}
+
+.instructions button, .settings button {
+    margin-top: 20px;
+}
